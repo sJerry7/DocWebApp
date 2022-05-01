@@ -1,0 +1,237 @@
+{% load static %}
+{% static 'img' as base_url %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles/SecondPage.css' %}">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+    {% if messages %}
+          <div id="myAlert" class="alert alert-success" id="success-alert" role="alert">
+            <button id="linkClose" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Success!!</strong> {{messages}} 
+          </div>
+      {% endif %}
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Welcome ,{{context.u_name}}</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">DISCOVER <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#doctors">DOCTORS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout">LOGOUT</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <section>
+        <div class="container-fluid sld">
+            <div class="slider">
+                <div class="slide slide1">
+                    <div class="caption">
+                        <h2>MORNING WALK</h2>
+                        <p>“An early-morning walk is a blessing for the whole day.”</p>
+                    </div>
+                </div>
+                <div class="slide slide2">
+                    <div class="caption">
+                        <h2>Running for Health</h2>
+                        <p>“A vigorous five-mile walk will do more good for an unhappy but otherwise healthy adult than all the medicine and psychology in the world.”</p>
+                    </div>
+                </div>
+                <div class="slide slide3">
+                    <div class="caption">
+                        <h2>Make Friends</h2>
+                        <p>Exercise to stimulate, not to annihilate. The world wasn’t formed in a day, and neither were we. Set small goals and build upon them. </p>
+                    </div>
+                </div>
+                <div class="slide slide4">
+                    <div class="caption">
+                        <h2>Find the Inner You</h2>
+                        <p>Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.</p>
+                    </div>
+                </div>
+                <div class="slide slide1">
+                    <div class="caption">
+                        <h2>MORNING WALK</h2>
+                        <p>“An early-morning walk is a blessing for the whole day.”</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>  
+</div>
+<div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mymodalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Confirm Appointment<i class="fas fa-user-plus"></i></h5>
+          <button type="button" class="close" color="white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="confirm" method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="send_name">Doctor Name</label><span> </span><i class="fas fa-user"></i>
+                    <input type="text" id="send_name" name="send_name" class="form-control">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="send_email">User Email</label><span> </span><i class="fas fa-map-marker-alt"></i>
+                  <input type="text" id="send_email" name="send_email" class="form-control">
+                </div>
+              </div>
+              <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="send_address">Address</label><span> </span><i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="send_address" name="send_address" class="form-control">
+              </div>
+            </div>
+              <div class="form-row">
+                <div class="form-group  col-md-12">
+                  <label for="send_city">City</label><span> </span><i class="fas fa-city"></i>
+                  <input type="text" id="send_city" name="send_city" class="form-control" id="inputCity">
+                </div>
+            </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="appointdate">Appointment Date</label><span> </span><i class="fas fa-map-marker-alt"></i>
+                    <input type="date" name="AppointDate" class="form-control" id="appointdate" placeholder="Choose Date">
+                </div>
+                
+                <div class="form-group col-md-6">
+                  <label for="appointtime">Appoint Time</label><span> </span><i class="fas fa-address-book"></i>
+                  <input type="time" name="AppointTime" class="form-control" id="appointTime" min="12:00" max="18:00"value="13:30" required>
+                  <span class="validity"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="patientname">Patient Name</label><span> </span><i class="fas fa-user"></i>
+                <input type="text" name="PatientName" class="form-control" id="patientname" placeholder="Patient Name">
+              </div>
+              <button type="submit" id="myWish" class="btn btnD2">Confirm</button>  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    <section class="sec1" id="home">
+        <div class="container-fluid">     
+            <div class="row">
+                {% for doc in data.items %}
+                <div class="offset-sm-2 col-sm-8">
+                    <div class="headerText text-center">
+                        <h2> {{doc.0}}</h2>
+                        <p>Doctors having more than 10 years of Experience </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row Neurologist">
+                {%for person in doc.1 %}
+                <div class="col-sm-4">
+                    <div class="placeBox">
+                        <div class="imgBx">
+                            <img src={{person.dr_img.url}} alt="" class="img-fluid">
+                        </div>
+                        <div class="content">
+                            <h3>
+                               {{person.dr_name}} <br>
+                                <span>{{person.dr_qualification}}<br>
+                                    <button class="btnD2" id="send_name" data-toggle="modal" data-name="{{ person.dr_name }}" data-city="{{ person.dr_city }}" data-address="{{ person.dr_address }}" data-email="{{ context.u_email }}" data-target="#mymodal">Book</button> </span></h3>       
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}   
+            </div>
+            {% endfor %}
+        </div>
+</section>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f8c548d27d.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    $(document).scroll(function(){
+        $('.navbar').toggleClass('scrolled',$(this).scrollTop() > $('.navbar').height());
+    });
+    </script>
+    <script>
+        $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+        });
+      </script>
+     <script>
+        //on delete button click this function call
+        $(document).on("click", "#send_name", function () {  
+          var id = $(this).attr('data-name');   //data-id of delete button
+          $(".modal-body #send_name").val(id); //set to model field
+        })
+        </script>
+        <script>
+            //on delete button click this function call
+            $(document).on("click", "#send_name", function () {  
+              var id = $(this).attr('data-city');   //data-id of delete button
+              $(".modal-body #send_city").val(id); //set to model field
+            })
+            </script>
+        <script>
+            //on delete button click this function call
+            $(document).on("click", "#send_name", function () {  
+                var id = $(this).attr('data-address');   //data-id of delete button
+                $(".modal-body #send_address").val(id); //set to model field
+            })
+        </script>
+        <script>
+            //on delete button click this function call
+            $(document).on("click", "#send_name", function () {  
+                var id = $(this).attr('data-email');   //data-id of delete button
+                $(".modal-body #send_email").val(id); //set to model field
+            })
+            $(document).ready(function() {
+                // show the alert
+                setTimeout(function() {
+                    $(".alert").alert('close');
+                }, 4000);
+            });
+        </script>
+</body>
+</html>
